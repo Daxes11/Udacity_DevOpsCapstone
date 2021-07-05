@@ -5,7 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'eksctl version'
-                sh 'CreateEKSCluster.sh'
+                sh 'aws version'
+                sh 'kubectl version'
+                sh './CreateEKSCluster.sh'
             }
         }
     }
