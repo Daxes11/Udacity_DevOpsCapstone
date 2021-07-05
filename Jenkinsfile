@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'python3 --version'
+                sh '/usr/bin/python3 --version'
+                sh 'eksctl version'
             }
         }
     }
