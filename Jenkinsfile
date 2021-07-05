@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'eksctl version'
+                sh 'CreateEKSCluster.sh'
             }
         }
     }
