@@ -1,3 +1,5 @@
+@Library('github.com/releaseworks/jenkinslib') _
+
 pipeline {
     agent any
     
@@ -7,7 +9,8 @@ pipeline {
                 sh 'eksctl version'
                 sh 'aws --version'
                 sh 'docker version'
-                sh './CreateEKSCluster.sh'
+                sh 'kubectl get nodes'
+                }
             }
         }
     }
