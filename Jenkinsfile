@@ -7,7 +7,7 @@ pipeline {
                 sh 'eksctl version'
                 sh 'aws --version'
                 sh 'docker version'
-                sh 'kubectl get nodes'
+                sh 'aws ec2 describe-security-groups'
             }
         }
     }
