@@ -31,7 +31,7 @@ pipeline {
         stage('Push Docker image to ECR') {
             steps {
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 586771751035.dkr.ecr.us-east-1.amazonaws.com'
-                sh 'export $image= "udacity_capstone:latest 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:$BRANCH_NAME"'
+                sh 'export image="udacity_capstone:latest 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:$BRANCH_NAME"'
                 sh 'docker tag udacity_capstone:latest 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:latest'
                 sh 'docker push 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:latest'
             }
