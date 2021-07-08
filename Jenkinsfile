@@ -7,7 +7,6 @@ pipeline {
                 sh 'cd flaskex_app'
                 sh 'python3 -m venv ~/.flaskex_app'
                 sh '. ~/.flaskex_app/bin/activate'
-                #sh 'source ~/.flaskex_app/bin/activate'
                 sh 'pip install --upgrade pip && pip install -r requirements.txt'
             }
         }
