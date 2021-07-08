@@ -4,10 +4,10 @@ pipeline {
     stages {
         stage('Install app requirements') {
             steps {
-                sh '''python3 -m venv ~/.flaskex_app
+                sh '''
+                      python3 -m venv ~/.flaskex_app
                       . ~/.flaskex_app/bin/activate
                       cd flaskex_app
-                      ls -la
                       pip install --upgrade pip && pip install -r requirements.txt
                    '''
 
@@ -15,9 +15,13 @@ pipeline {
         }
         stage('Linting App.py / Dockerfile') {
             steps {
-                sh 'pylint --disable=R,C app.py'
-                sh 'cd ..'
-                sh 'hadolint Dockerfile'
+                sh '''
+                      cd flaskex_app
+                      pylint --disable=R,C app.py
+                      cd ..
+                      sh 'hadolint Dockerfile
+                   '''
+
             }
         }
         stage('Build Docker image') {
