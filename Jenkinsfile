@@ -4,11 +4,9 @@ pipeline {
     stages {
         stage('Install app requirements') {
             steps {
-                sh 'cd flaskex_app'
                 sh 'python3 -m venv ~/.flaskex_app'
                 sh '. ~/.flaskex_app/bin/activate'
-                sh 'pwd'
-                sh 'ls -la'
+                sh 'cd flaskex_app'
                 sh 'pip install --upgrade pip && pip install -r requirements.txt'
             }
         }
