@@ -16,6 +16,8 @@ pipeline {
         stage('Linting App.py / Dockerfile') {
             steps {
                 sh '''
+                      python3 -m venv ~/.flaskex_app
+                      . ~/.flaskex_app/bin/activate
                       cd flaskex_app
                       pylint --disable=R,C app.py
                       cd ..
