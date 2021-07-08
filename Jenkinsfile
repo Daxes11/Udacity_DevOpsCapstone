@@ -24,15 +24,15 @@ pipeline {
         }
         stage('Build Docker image') {
             steps {              
-                sh 'docker build -t udacity_capstone + env.BRANCH_NAME .'
+                sh 'docker build -t udacity_capstone .'
             }
         }
         stage('Push Docker image to ECR') {
             steps {
                 sh '''
                       aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 586771751035.dkr.ecr.us-east-1.amazonaws.com
-                      docker tag udacity_capstone: + env.BRANCH_NAME 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone: + env.BRANCH_NAME
-                      docker push 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone: + env.BRANCH_NAME
+                      docker tag udacity_capstone:latest 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:$env.BRANCH_NAME
+                      docker push 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:$env.BRANCH_NAME
                    ''' 
             }
         }
