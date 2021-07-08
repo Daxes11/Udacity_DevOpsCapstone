@@ -25,7 +25,7 @@ pipeline {
         stage('Build Docker image') {
             steps {              
                 sh 'docker build -t udacity_capstone .'
-                sh 'echo env.GIT_BRANCH'
+                sh "printenv | sort"
             }
         }
         stage('Push Docker image to ECR') {
