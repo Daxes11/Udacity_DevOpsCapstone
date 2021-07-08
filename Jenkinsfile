@@ -5,8 +5,6 @@ pipeline {
         stage('Install app requirements') {
             steps {
                 sh '''
-                      python3 -m venv ~/.flaskex_app
-                      . ~/.flaskex_app/bin/activate
                       cd flaskex_app
                       pip install --upgrade pip && pip install -r requirements.txt
                    '''
@@ -16,11 +14,10 @@ pipeline {
         stage('Linting App.py / Dockerfile') {
             steps {
                 sh '''
-                      . ~/.flaskex_app/bin/activate
                       cd flaskex_app
                       pylint --disable=R,C app.py
                       cd ..
-                      sh 'hadolint Dockerfile
+                      sh hadolint Dockerfile
                    '''
 
             }
