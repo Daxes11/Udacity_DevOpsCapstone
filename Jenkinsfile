@@ -25,7 +25,7 @@ pipeline {
         stage('Build Docker image') {
             steps {              
                 sh 'docker build -t udacity_capstone .'
-                sh'echo "fffff" + ${env.BRANCH_NAME}'
+                sh'echo ${env.BRANCH_NAME}'
             }
         }
         stage('Push Docker image to ECR') {
