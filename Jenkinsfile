@@ -2,20 +2,22 @@ pipeline {
     agent any
     
     stages {
-        stage('Install requirements') {
+        stage('Install app requirements') {
             steps {
                 sh 'cd flaskex_app'
                 sh 'python3 -m venv ~/.flaskex_app'
-                sh 'source ~/.flaskex_app/bin/activate'
+                sh '. flaskex_app/bin/activate'
                 sh 'pip install --upgrade pip && pip install -r requirements.txt'
             }
         }
-        stage('Linting') {
+        stage('Linting App.py / Dockerfile') {
             steps {
                 sh 'pylint --disable=R,C app.py'
+                sh 'cd ..'
+                sh 'hadolint Dockerfile'
             }
         }
-        stage('Build image') {
+        stage('Build Docker image') {
             steps {
                 sh 'eksctl version'
                 sh 'aws --version'
@@ -26,7 +28,7 @@ pipeline {
                 sh 'docker build -t udacity_capstone .'
             }
         }
-        stage('Push image to ECR') {
+        stage('Push Docker image to ECR') {
             steps {
                 sh '''aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 586771751035.dkr.ecr.us-east-1.amazonaws.com
                       docker tag udacity_capstone:latest 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:latest
