@@ -7,7 +7,7 @@ We will develop a CI/CD pipeline for micro services applications using a sample 
 # Used Tools and Technologies
 
 * [Flaskex](https://github.com/anfederico/flaskex) as flask sample application for deployment
-* Using Jenkins together Blue Ocean plugin to implement CI/CD
+* Using Jenkins together with Blue Ocean plugin to implement CI/CD
 * Working with CloudFormation (eksctl) to deploy clusters
 * Building Kubernetes clusters using AWS EKS
 * Docker for building containers in pipelines
@@ -32,7 +32,7 @@ eksctl create cluster --name CapstoneEKSCluster --version 1.19 --region us-east-
 
 # Blue/Green Deployment
 
-To deploy the Blue/Green environment we are using different branches in this repository:
+To deploy the Blue/Green environment we are using different branches in our repository:
 
 ```sh
 blue
