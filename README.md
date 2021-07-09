@@ -42,4 +42,4 @@ green
 
 Depending on the selected branch only parts of the Jenkins pipeline are running. As for example for the green pipeline:
 
-![Jenkins Green Deployment](/screenshots/04 - Deploying green pipeline.PNG)
+![Jenkins Green Deployment](./screenshots/04 - Deploying green pipeline.PNG)
