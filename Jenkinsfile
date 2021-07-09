@@ -42,13 +42,13 @@ pipeline {
         stage('Deploy green container') {
             steps {
                 sh 'kubectl apply -f kubernetes/deployment-green.yml'
-                #when { branch 'green'}
+                //when { branch 'green'}
             }
         }
         stage('Redirect service to green container') {
             steps {
                 sh 'kubectl apply -f kubernetes/loadbalancer-green.yml'
-                #when { branch 'green'}
+                //when { branch 'green'}
             }
         }
         stage('Deploy blue container') {
