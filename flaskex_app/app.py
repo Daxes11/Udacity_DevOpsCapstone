@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-"""Flask sample app taken from https://github.com/anfederico/flaskex"""
 
 from flask import Flask, redirect, url_for, render_template, request, session
 from scripts import forms
 from scripts import helpers
 
 import json
+import sys
 import os
 
-APP = Flask(__name__)
-APP.secret_key = os.urandom(12)  # Generic key for dev purposes only
+app = Flask(__name__)
+app.secret_key = os.urandom(12)  # Generic key for dev purposes only
 
 # Heroku
 #from flask_heroku import Heroku
-#heroku = Heroku(APP)
+#heroku = Heroku(app)
 
 # ======== Routing =========================================================== #
 # -------- Login ------------------------------------------------------------- #
-@APP.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if not session.get('logged_in'):
         form = forms.LoginForm(request.form)
@@ -36,14 +36,14 @@ def login():
     return render_template('home.html', user=user)
 
 
-@APP.route("/logout")
+@app.route("/logout")
 def logout():
     session['logged_in'] = False
     return redirect(url_for('login'))
 
 
 # -------- Signup ---------------------------------------------------------- #
-@APP.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if not session.get('logged_in'):
         form = forms.LoginForm(request.form)
@@ -64,7 +64,7 @@ def signup():
 
 
 # -------- Settings ---------------------------------------------------------- #
-@APP.route('/settings', methods=['GET', 'POST'])
+@app.route('/settings', methods=['GET', 'POST'])
 def settings():
     if session.get('logged_in'):
         if request.method == 'POST':
@@ -81,4 +81,4 @@ def settings():
 
 # ======== Main ============================================================== #
 if __name__ == "__main__":
-    APP.run(debug=True, use_reloader=True, host="0.0.0.0")
+    app.run(debug=True, use_reloader=True, host="0.0.0.0")
