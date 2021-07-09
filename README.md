@@ -40,7 +40,9 @@ blue
 green
 ```
 
-Depending on the selected branch only parts of the Jenkins pipeline are running. As for example for the green pipeline:
+Depending on the selected branch only parts of the Jenkins pipeline are running. For example for the green pipeline:
 
 
 ![Green Pipeline](./screenshots/greenpipeline.PNG)
+
+This makes it easy to switch between the deployments using a blue/green branch commit. 
