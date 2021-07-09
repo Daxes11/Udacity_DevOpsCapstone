@@ -7,7 +7,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: flaskex-deployment-green
+    app: flaskex-green
   ports:
     - port: 80
       targetPort: 5000
