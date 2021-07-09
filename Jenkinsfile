@@ -11,7 +11,7 @@ pipeline {
 
             }
         }
-        stage('Linting App.py / Dockerfile') {
+        stage('Linting app.py / Dockerfile') {
             steps {
                 sh '''
                       cd flaskex_app
@@ -37,9 +37,33 @@ pipeline {
                 sh 'docker push 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:$BRANCH_NAME'
             }
         }
-        stage('Post Build') {
+        stage('Connect to kubernetes cluster') {
             steps {
-                sh 'docker run -p 80:5000 -d 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:$BRANCH_NAME'
+                sh 'aws eks --region us-east-1 update-kubeconfig --name CapstoneEKSCluster'
+            }
+        }
+        stage('Deploy green container') {
+            when { branch 'green'}
+            steps {
+                sh 'kubectl apply -f kubernetes/deployment-green.yml'
+            }
+        }
+        stage('Redirect service to green container') {
+            when { branch 'green'}
+            steps {
+                sh 'kubectl apply -f kubernetes/loadbalancer-green.yml'
+            }
+        }
+        stage('Deploy blue container') {
+            when { branch 'blue'}
+            steps {
+                sh 'kubectl apply -f kubernetes/deployment-blue.yml'
+            }
+        }
+        stage('Redirect service to blue container') {
+            when { branch 'blue'}
+            steps {
+                sh 'kubectl apply -f kubernetes/loadbalancer-blue.yml'
             }
         }
     }

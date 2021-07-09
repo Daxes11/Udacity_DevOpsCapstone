@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: flaskex-service-lb
+  labels:
+    app: flaskex-service-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: flaskex-deployment-green
+  ports:
+    - port: 80
+      targetPort: 5000

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskex-deployment-blue
+  labels:
+    app: flaskex-deployment-blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskex-blue
+  template:
+    metadata:
+      labels:
+        app: flaskex-blue
+    spec:
+      containers:
+      - name: flaskex-container-blue
+        image: 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:blue
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
