@@ -3,9 +3,12 @@ kind: Deployment
 metadata:
   name: flaskex-deployment
   labels:
-    app: flaskex-deployment
+    app: flaskex
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: flaskex
   template:
     metadata:
       labels:
