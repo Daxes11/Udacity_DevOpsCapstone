@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """Flask sample app taken from https://github.com/anfederico/flaskex"""
 
-import json
-import os
 from flask import Flask, redirect, url_for, render_template, request, session
 from scripts import forms
 from scripts import helpers
 
+import json
+import os
 
 APP = Flask(__name__)
 APP.secret_key = os.urandom(12)  # Generic key for dev purposes only
