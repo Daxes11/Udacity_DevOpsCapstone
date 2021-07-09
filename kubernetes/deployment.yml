@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: flaskex-deployment
+  labels:
+    app: flaskex-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flaskex
+    spec:
+      containers:
+      - name: flaskex-container
+        image: 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:green
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
