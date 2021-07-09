@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flaskex-deployment
+  name: flaskex-deployment-green
   labels:
-    app: flaskex
+    app: flaskex-deployment-green
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flaskex
+      app: flaskex-green
   template:
     metadata:
       labels:
-        app: flaskex
+        app: flaskex-green
     spec:
       containers:
-      - name: flaskex-container
-        image: 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:main
+      - name: flaskex-container-green
+        image: 586771751035.dkr.ecr.us-east-1.amazonaws.com/udacity_capstone:green
         imagePullPolicy: Always
         ports:
         - containerPort: 80

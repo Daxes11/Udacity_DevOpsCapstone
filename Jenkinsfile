@@ -11,7 +11,7 @@ pipeline {
 
             }
         }
-        stage('Linting App.py / Dockerfile') {
+        stage('Linting app.py / Dockerfile') {
             steps {
                 sh '''
                       cd flaskex_app
@@ -40,27 +40,27 @@ pipeline {
             }
         }
         stage('Deploy green container') {
+            when { branch 'green'}
             steps {
                 sh 'kubectl apply -f kubernetes/deployment-green.yml'
-                //when { branch 'green'}
             }
         }
         stage('Redirect service to green container') {
+            when { branch 'green'}
             steps {
                 sh 'kubectl apply -f kubernetes/loadbalancer-green.yml'
-                //when { branch 'green'}
             }
         }
         stage('Deploy blue container') {
+            when { branch 'blue'}
             steps {
                 sh 'kubectl apply -f kubernetes/deployment-blue.yml'
-                when { branch 'blue'}
             }
         }
         stage('Redirect service to blue container') {
+            when { branch 'blue'}
             steps {
                 sh 'kubectl apply -f kubernetes/loadbalancer-blue.yml'
-                when { branch 'blue'}
             }
         }
     }

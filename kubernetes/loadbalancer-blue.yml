@@ -1,14 +1,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: flaskex-service
+  name: flaskex-service-lb
   labels:
-    app: flaskex
-    env: prod
+    app: flaskex-service-lb
 spec:
   type: LoadBalancer
   selector:
-    app: flaskex
+    app: flaskex-deployment-blue
   ports:
     - port: 80
       targetPort: 5000
